@@ -1,22 +1,23 @@
+const messages = require('../utils/messages');
 const { check, validationResult } = require('express-validator');
 
 const login = () => [
   check('email')
     .notEmpty()
-    .withMessage('O campo email é obrigatório!')
+    .withMessage(messages.REQUIRED)
     .bail()
     .isEmail()
-    .withMessage('Endereço de email inválido!')
+    .withMessage(messages.INVALID_MAIL)
     .bail(),
   check('password')
     .notEmpty()
-    .withMessage('O campo senha é obrigatório!')
+    .withMessage(messages.REQUIRED)
     .bail()
     .isLength({ min: 4 })
-    .withMessage('Por favor, preencha a senha com no mínimo 4 caracteres!')
+    .withMessage(messages.MIN)
     .bail()
     .isLength({ max: 15 })
-    .withMessage('Por favor, preencha a senha com no máximo 15 caracteres!')
+    .withMessage(messages.MAX)
     .bail(),
   (req, res, next) => {
     const errors = validationResult(req);

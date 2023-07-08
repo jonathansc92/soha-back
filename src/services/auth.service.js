@@ -1,17 +1,32 @@
 const jwt = require('jsonwebtoken');
+const messages = require('../utils/messages');
+const users = require('../utils/users');
 
 module.exports = {
     async login(req, res) {
-        if (req.body.email === 'jonathan@teste.com') {
+        users.users.forEach(function (value) {
+            if (req.body.email === value.email && req.body.password === value.password) {
+                var token = jwt.sign({ value }, process.env.SECRET, {
+                    algorithm: "HS256",
+                    expiresIn: 60 // 15 min
+                });
 
-            const id = 1;
-            var token = jwt.sign({ id }, process.env.SECRET, {
-                algorithm: "HS256",
-                expiresIn: 60 // 15 min
-            });
+                return res.status(200).send({ auth: true, message: messages.AUTHENTICATED, token: token });
+            } else {
+                return res.status(400).send({ auth: false, message: messages.BAD_REQUEST });
+            }
+        });
+    },
 
-            return res.status(200).send({ auth: true, token: token });
-        }
+    async logout(req, res) {
+        const authHeader = req.headers["authorization"];
+        jwt.sign(authHeader, "", { expiresIn: 1 }, (logout, err) => {
+            if (logout) {
+                res.status(200).send({ message: messages.LOGOUT });
+            } else {
+                res.status(500).send({ message: messages.ERROR });
+            }
+        })
     },
 
     async me(req, res) {

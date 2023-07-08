@@ -5,6 +5,10 @@ module.exports = {
         return await authService.login(req, res);
     },
 
+    async logout(req, res) {
+        return await authService.logout(req, res);
+    },
+
     async me(req, res) {
         return await authService.me(req, res);
     },
