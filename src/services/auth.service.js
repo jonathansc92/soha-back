@@ -8,7 +8,7 @@ module.exports = {
             if (req.body.email === value.email && req.body.password === value.password) {
                 var token = jwt.sign({ name: value.name, email: value.email }, process.env.SECRET, {
                     algorithm: "HS256",
-                    expiresIn: 60 // 15 min
+                    expiresIn: 900 // 15 min
                 });
 
                 return res.status(200).send({ auth: true, user: { name: value.name, email: value.email }, message: messages.AUTHENTICATED, token: token });
