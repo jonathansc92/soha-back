@@ -1,0 +1,15 @@
+version: '3.9'
+services:
+  api:
+    build: .
+    volumes:
+      - .:/src
+    command: npm run serve
+    ports:
+      - "8080:8080"
+    environment:
+      NODE_ENV: development
+      DEBUG: nodejs-docker-express:*
+networks:
+  default:
+    name: soha
