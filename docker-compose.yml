@@ -6,7 +6,7 @@ services:
       - .:/src
     command: npm run serve
     ports:
-      - "8080:8080"
+      - "${PORT}:${PORT}"
     environment:
       NODE_ENV: development
       DEBUG: nodejs-docker-express:*
