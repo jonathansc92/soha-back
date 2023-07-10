@@ -49,9 +49,12 @@ Para executar os testes digite o comando:
     docker-compose up -d
 ```
 
-- Link Back - [http://localhost:8080/]
+- GET [http://localhost:8080/](http://localhost:8080/)
+- POST [http://localhost:8080/api/auth/login](http://localhost:8080/api/auth/login)
+- POST [http://localhost:8080/api/auth/logout](http://localhost:8080/api/auth/login)
+
 
 
 - Autor - Jonathan Cruz
-- Website - [https://jonathansc92.github.io/jonathancruzdev/?language=ptBr]
+- [https://jonathansc92.github.io/jonathancruzdev/?language=ptBr](https://jonathansc92.github.io/jonathancruzdev/?language=ptBr)
 
